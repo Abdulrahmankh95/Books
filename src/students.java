@@ -1,3 +1,7 @@
+
+import com.alien.enterpriseRFID.tags.Tag;
+import java.util.Scanner;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -85,16 +89,82 @@ public class students {
     }
     
     
+     
     
-    
-    public static void Barrow_books(){
-    }
+    public static void Barrow_books(Tag[] Taglist){
+       
+//        String Std[]=new String[5];
+//      
+//     Std[0]="100"; 
+//     Std[1]="200"; 
+//     Std[2]="300"; 
+//     Std[3]="400"; 
+//     Std[4]="500"; 
+//     
+//  String Book[]=new String[5];
+//      
+//     Book[0]="1000"; 
+//     Book[1]="2000"; 
+//     Book[2]="3000"; 
+//     Book[3]="4000"; 
+//     Book[4]="5000"; 
+//
+//      
+//        Scanner Scan = new Scanner(System.in);
+//        int S_id;
+//        int B_id;
+//        int a = 0;
+//        do{
+//        
+//        for(int i=0;i<Std.length;i++){
+//             for(int j=0;i<Taglist.length;j++){
+//           if(Taglist[j].toString() == Std[i]){
+//        
+//            System.out.println("Student ID is correct");
+//            a++;
+//          break;
+//        }else if(i==Std.length-1){
+//               System.out.println("Student id is not correct");
+//               break;
+//           }
+//             }
+//           }
+//         }while(a==0);
+//        
+//        
+//        
+//  
+//            
+//       do{
+//    
+//         for(int i=0;i<Book.length;i++){
+//           for(int j=0;i<Taglist.length;j++){
+//        if(Taglist[j].toString() == Book[i]){
+//        
+//            System.out.println("Book ID is correct");
+//            a++;
+//            
+//           break;
+//        
+//        }else if(i==Book.length-1){
+//               System.out.println("Book id is not correct");
+//               break;
+//           }
+//           
+//         }
+//         }
+//       }while(a==1);
+             
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+    
+    
+    
+   }
+        
+        
+   
+
+   
+   
     
 }
