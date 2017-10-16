@@ -1,4 +1,9 @@
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 
 
 /*
@@ -7,13 +12,15 @@
  * and open the template in the editor.
  */
 
-
+ 
 /**
  *
  * @author 3badi
  */
 public class NewJFrame1 extends javax.swing.JFrame {
 
+    public static NewJFrame1  Owin =  new NewJFrame1();
+    
     /**
      * Creates new form NewJFrame1
      */
@@ -37,6 +44,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(null);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,13 +104,36 @@ public class NewJFrame1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-boolean ch = NewJFrame.check;
+boolean ch = NewJFrame.check,tr;
 if (ch == true)
-Librarian.Login(jTextField1.getText(),jTextField2.getText());
+try {
+   tr= Librarian.Log_in(jTextField1.getText(),jTextField2.getText());
+   if (tr==true){
+   PrintReport Nwin = new PrintReport();
+
+
+   Nwin.setVisible(true);
+    Owin.setVisible(false);
+   }
+} catch (SQLException ex) {
+    Logger.getLogger(NewJFrame1.class.getName()).log(Level.SEVERE, null, ex);
+}
 else {
-Admin.Log_in(jTextField1.getText(),jTextField2.getText());
+    try {
+        Admin.Log_in(jTextField1.getText(),jTextField2.getText());
+        CreateAccount nwin = new CreateAccount();
+        nwin.setVisible(true);
+        Owin.setVisible(false);
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJFrame1.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
 }
+
+ 
+
+
+
   
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -137,7 +168,8 @@ Admin.Log_in(jTextField1.getText(),jTextField2.getText());
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame1().setVisible(true);
+                
+               Owin.setVisible(true);
             }
         });
     }
