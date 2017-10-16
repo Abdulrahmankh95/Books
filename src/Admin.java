@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -65,8 +75,77 @@ public class Admin {
     }
     
     
-    public static void Log_in(){
-    }
+    public static void Log_in(String username,String passw) throws SQLException{
+       String uname="" ;
+        String pass ="";
+        
+        Statement st = null;
+        Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "sys as sysdba";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+
+
+    
+        rs = st.executeQuery("select username,password from userss where user_type = 'Admin'");
+        try {
+            while (rs.next()) {
+               uname = rs.getString(1).toString();
+                pass = rs.getString(2).toString();
+                
+
+                
+
+                 
+                         
+            }
+      
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        
+               if (username.equals(uname) && passw.equals(pass)){
+        
+        
+        }
+        else{
+           System.out.println("wrong password"); 
+            
+        }
+        
+       
+}
+       
+        
+        
+    
     
      public static void Create_accounts(){
     }
