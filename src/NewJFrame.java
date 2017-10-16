@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+  
  
 
 
@@ -13,6 +13,7 @@
  */
 public class NewJFrame extends javax.swing.JFrame {
 public static boolean check=true;
+public static NewJFrame  Owin =  new NewJFrame();
     /**
      * Creates new form NewJFrame
      */
@@ -102,15 +103,24 @@ public static boolean check=true;
         // TODO add your handling code here:
         
          
-        if (jRadioButton1.isEnabled()== true){
-//       NewJFrame=NewJFrame1;
+        if (jRadioButton1.isSelected()== true){
+            check=true;
         
         } 
-        else{
-        
+        else if (jRadioButton2.isSelected()== true){
+        check=false;
         
         
         }
+        
+        
+        
+        
+       
+        NewJFrame1.Owin.setVisible(true);
+         
+         Owin.setVisible(false);
+
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -144,7 +154,8 @@ public static boolean check=true;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+             
+             Owin.setVisible(true);
             }
         });
     }
