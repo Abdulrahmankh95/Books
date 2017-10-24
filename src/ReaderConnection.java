@@ -15,9 +15,7 @@ import java.util.Scanner;
 
 
 public class ReaderConnection {
-
-
-    public static void main(String[] args) throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderCommandErrorException, AlienReaderException, SQLException {
+public static String gettag() throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException{
 
 AlienClass1Reader reader = new AlienClass1Reader(); 
 reader.setConnection("192.168.1.3", 23); 
@@ -26,22 +24,35 @@ reader.setPassword("password");
 
        
         reader.open();
+         
+
+ String tagListo="";
+  String tagList;
+      while(true){
+      tagList = reader.getTagID();
+     if(tagListo.equals(tagList)){
+     break;}
+      tagListo=tagList;
        
+        
+         
+        
+  
+      } 
 
-                System.out.println(reader.isOpen());
-           
-        String tagList = reader.getTagID();
-     
-      //  System.out.println(tagList);
+return tagList;
+}
 
-     if (tagList == null) {   
-          System.out.println("No Tags Found"); 
-      }
-       else { 
+    public static void main(String[] args) throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderCommandErrorException, AlienReaderException, SQLException, InterruptedException {
 
-        //  Borrowing.Borrwowing(tagList);
-
-     }
+//     if (tagList == null) {   
+//          System.out.println("No Tags Found"); 
+//      }
+//       else { 
+//
+//        //  Borrowing.Borrwowing(tagList);
+//
+ // }
      
      
      
@@ -57,6 +68,5 @@ reader.setPassword("password");
 //
 //          }
 
-         reader.close();
     }
 }
