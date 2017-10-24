@@ -92,7 +92,7 @@ public class Admin {
         String ServerPort = "1521";
         String sid = "SSBR";
         String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-        String Username = "sys as sysdba";
+        String Username = "project";
         String password = "tiger";
         try {
             conn = DriverManager.getConnection(url, Username, password);
