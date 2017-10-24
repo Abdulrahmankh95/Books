@@ -1,4 +1,7 @@
 
+import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
+import com.alien.enterpriseRFID.reader.AlienReaderException;
+import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -30,8 +33,8 @@ import javax.swing.JOptionPane;
  * @author 3badi
  */
 public class Borrow extends javax.swing.JFrame {
-    String a;
-    String b;
+    String book;
+    String student;
     boolean ch1=false,ch2=false;
 
     /**
@@ -56,6 +59,7 @@ public class Borrow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,10 +83,17 @@ public class Borrow extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Done");
+        jButton3.setText("Borrow");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Return");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -104,8 +115,10 @@ public class Borrow extends javax.swing.JFrame {
                         .addGap(252, 252, 252)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(106, 106, 106)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,48 +134,77 @@ public class Borrow extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(38, 38, 38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  try {
-       Scanner scan =new Scanner(System.in);
-       System.out.println("enter student id");
+ 
+        try{
+        try {
+      
       
         
-       b=scan.nextLine() ;
-           ch2= Borrowing.Borrwowing(b,ch2);
+       student=ReaderConnection.gettag();
+           ch2= Borrowing.Borrwowing(student,ch2);
             
             
              
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlienReaderTimeoutException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlienReaderConnectionException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlienReaderException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+        }catch(Exception e){
+                          JOptionPane.showMessageDialog(null," Tags not found" );
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("enter book id");
-        Scanner scan =new Scanner(System.in);
-        a =scan.nextLine() ;
+      try{
+        
         try {
-           ch1= Borrowing.borrowing2(a,ch1);
+            // TODO add your handling code here:
+
+            book =ReaderConnection.gettag();
+        } catch (AlienReaderTimeoutException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlienReaderConnectionException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlienReaderException ex) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+           ch1= Borrowing.borrowing2(book,ch1);
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }catch(Exception e){
+                        JOptionPane.showMessageDialog(null," Tags not found" );
+
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      if(ch1==true && ch2==true){
+     // check if the user has scanned two books or not 
+    
+     boolean check18=true;
+        if(ch1==true && ch2==true){
        int db = 0;
-           db = JOptionPane.showConfirmDialog (null, "Are you sure that this information is correct : student id: "+b+"    book id: "+a,"Warning",db);
+           db = JOptionPane.showConfirmDialog (null, "Are you sure that this information is correct : student id: "+student+"    book id: "+book,"Warning",db);
 if(db == JOptionPane.YES_OPTION){
              // System.out.println("ok");
               Statement st = null;
@@ -178,7 +220,7 @@ if(db == JOptionPane.YES_OPTION){
         String ServerPort = "1521";
         String sid = "SSBR";
         String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-        String Username = "sys as sysdba";
+        String Username = "project";
         String password = "tiger";
         try {
             conn = DriverManager.getConnection(url, Username, password);
@@ -192,46 +234,114 @@ if(db == JOptionPane.YES_OPTION){
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-     LocalDate localDate = LocalDate.now();
-       dtf.format(localDate);
+  
        
-       
-        int bid=4;
+        
         ResultSet rss = null;
         
            try {
-               rss = st.executeQuery("select borrowing_id from borrowing ");
-           } catch (SQLException ex) {
-               Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
-           }
-
-           try {
+               rss = st.executeQuery("select book_id from borrowing ");
                while(rss.next()){
-                 if(rss.next()==false)  
-                   bid=rss.getInt(1)+1;
+               
+               if(  rss.getString(1).equals(book)){
+               check18=false;
+               }
+               
                }
            } catch (SQLException ex) {
                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
            }
-    
+
+     
+                  if(check18 == true){
                   try {
-                      rss = st.executeQuery("insert into borrowing values(6,Date '"+localDate+"',Date '"+localDate+5+"','"+a+"','"+b+"')  ");
+                      rss = st.executeQuery("insert into borrowing values(1,SYSDATE,(SYSDATE + 10),'"+book+"','"+student+"')  ");
                   } catch (SQLException ex) {
                       Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
                   }
-  
+                   student="";
+              book="";
+              ch1=false;
+              ch2=false;
+                   JOptionPane.showMessageDialog(null," Borrowing confirmed" );
+                  }else{
+                  
+                  
+                  JOptionPane.showMessageDialog(null," Book already borrowed" );
+     student="";
+              book="";
+              ch1=false;
+              ch2=false;
+                  }
 }
 
 else {
-              a="";
-              b="";
+              student="";
+              book="";
               ch1=false;
               ch2=false;
 }
-      }
+      }else{
+         
+         JOptionPane.showMessageDialog(null," scan tags" );
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+    if(ch1==true && ch2==true){
+       int db = 0;
+           db = JOptionPane.showConfirmDialog (null, "Are you sure that this information is correct : student id: "+student+"    book id: "+book,"Warning",db);
+if(db == JOptionPane.YES_OPTION){
+             // System.out.println("ok");
+              Statement st = null;
+        Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "project";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          ResultSet rsss = null;
+        
+           try {
+               //System.out.println(student);
+               rsss = st.executeQuery("delete from borrowing where book_id='"+book+"'");
+           } catch (SQLException ex) {
+               Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+           }   
+}
+else {
+    
+              student="";
+              book="";
+              ch1=false;
+              ch2=false;
+}
+    }else{
+ JOptionPane.showMessageDialog(null," scan tags" );
+    }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
   
     /**
      * @param args the command line arguments
@@ -275,6 +385,7 @@ else {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
