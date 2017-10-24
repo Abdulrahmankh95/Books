@@ -21,7 +21,7 @@ public class OracleConnection {
         String ServerPort="1521";
         String sid="SSBR";
         String url="jdbc:oracle:thin:@" + ServerName +":"+ ServerPort + ":" + sid;
-        String Username="myuser1";
+        String Username="project";
         String password="mypassword";
         conn=DriverManager.getConnection(url,Username,password);
           System.out.println("Successfully connected to the database");
