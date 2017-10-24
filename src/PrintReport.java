@@ -171,7 +171,7 @@ Connection conn = null;
         String ServerPort = "1521";
         String sid = "SSBR";
         String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-        String Username = "sys as sysdba";
+        String Username = "project";
         String password = "tiger";
         try {
             conn = DriverManager.getConnection(url, Username, password);
@@ -208,7 +208,7 @@ if (student.contains("choose")==false){
 
                 
 
-                 
+                  
                 
                 
                 System.out.println(" First Name: " + Fname + " Last Name: " + Lname + " Start Date: " +Sdate + " End Date: " +Edate+ " Title: " +Title);
