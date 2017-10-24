@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -192,7 +193,7 @@ public class CreateAccount extends javax.swing.JFrame {
         String ServerPort = "1521";
         String sid = "SSBR";
         String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-        String Username = "sys as sysdba";
+        String Username = "project";
         String password = "tiger";
         try {
             conn = DriverManager.getConnection(url, Username, password);
@@ -216,9 +217,9 @@ public class CreateAccount extends javax.swing.JFrame {
             Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
      
-   
+   JOptionPane.showMessageDialog(null, "Account Created ");
 
-
+ 
 
 
 
