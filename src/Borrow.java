@@ -1,4 +1,4 @@
-
+ 
 import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
 import com.alien.enterpriseRFID.reader.AlienReaderException;
 import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
@@ -16,8 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
-
+  
+ 
 
 
 
