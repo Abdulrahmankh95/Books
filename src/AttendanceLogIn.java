@@ -1,3 +1,8 @@
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +15,10 @@
  */
 public class AttendanceLogIn extends javax.swing.JFrame {
 
+    
+    
+    public static AttendanceLogIn  Owin =  new AttendanceLogIn();
+    
     /**
      * Creates new form AttendanceLogIn
      */
@@ -42,6 +51,11 @@ public class AttendanceLogIn extends javax.swing.JFrame {
         jLabel3.setText("Password ");
 
         jButton1.setText("Log In");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +113,55 @@ public class AttendanceLogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+
+int ch = AttendanceF1.check;
+boolean tr;
+if (ch == 1)
+try {
+   tr= instructor.Log_in(jTextField1.getText(),jTextField2.getText());
+   if (tr==true){
+   AttendanceF2.Owin.setVisible(true);
+
+
+   
+    Owin.setVisible(false);
+   }
+} catch (SQLException ex) {
+    Logger.getLogger(AttendanceLogIn.class.getName()).log(Level.SEVERE, null, ex);
+}
+else if (ch == 2){
+    try {
+        students.Log_in(jTextField1.getText(),jTextField2.getText());
+        AttendanceHistory nwin = new AttendanceHistory();
+        nwin.setVisible(true);
+        Owin.setVisible(false);
+    } catch (SQLException ex) {
+        Logger.getLogger(AttendanceLogIn.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+}
+
+
+else if (ch == 3){
+    try {
+        Atin_admin.Log_in(jTextField1.getText(),jTextField2.getText());
+       
+        AttendanceF3.Owin.setVisible(true);
+        Owin.setVisible(false);
+    } catch (SQLException ex) {
+        Logger.getLogger(AttendanceLogIn.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+
+
+
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -129,7 +192,8 @@ public class AttendanceLogIn extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceLogIn().setVisible(true);
+                Owin.setVisible(true);
+
             }
         });
     }
