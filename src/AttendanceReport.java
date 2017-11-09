@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +20,8 @@
  */
 public class AttendanceReport extends javax.swing.JFrame {
 
+    public static AttendanceReport Owin = new AttendanceReport();
+    
     /**
      * Creates new form AttendanceReport
      */
@@ -26,11 +38,14 @@ public class AttendanceReport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,11 +53,44 @@ public class AttendanceReport extends javax.swing.JFrame {
 
         jLabel2.setText("Attendance System ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Student", "Abdulrahman Khoshaim", "Khalid", "Faris" }));
+        jComboBox1.setEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Student" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course", "CPIT 440", "CPIT 330", "CPIS 428" }));
+        jComboBox2.setEnabled(false);
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Print Report ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Student");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Course");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,12 +107,15 @@ public class AttendanceReport extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(197, 197, 197))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 165, Short.MAX_VALUE)
+                .addGap(0, 65, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154))))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(154, 154, 154))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -77,17 +128,143 @@ public class AttendanceReport extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel2)
-                .addGap(34, 34, 34)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButton1))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButton2))
+                .addGap(45, 45, 45)
                 .addComponent(jButton1)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+
+jComboBox2.setVisible(true);
+jComboBox1.setVisible(false);
+jComboBox1.setSelectedIndex(0);
+jComboBox2.enable();
+
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+String student,course;
+
+Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "attendance";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+
+Statement st = null;
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+
+student= jComboBox1.getSelectedItem().toString();
+course= jComboBox2.getSelectedItem().toString();
+if (student.contains("Choose")==false){
+        
+      try {
+            rs = st.executeQuery("select * from attendance where STUDENT_NAME =  "+"'"+student+"'" );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+               Date Adte=rs.getDate(1);
+                String St=rs.getString(2).toString();
+                String Cname = rs.getString(3).toString();
+               String Fname = rs.getString(4).toString();
+
+
+                 
+
+                  
+                
+                
+                System.out.println(" Student Name: " + Fname +" Attendance Date: " +Adte.toString() + " Status: " +St+ " Course name : " +Cname);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+} 
+else if(course.contains("Choose")==false){
+    
+              try {
+            
+                rs = st.executeQuery("select * from attendance where Course_name =  "+"'"+course+"'" );
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+               Date Adte=rs.getDate(1);
+                String St=rs.getString(2).toString();
+                String Cname = rs.getString(3).toString();
+               String Fname = rs.getString(4).toString();
+
+ 
+                 
+
+                  
+                
+                
+                System.out.println(" Student Name: " + Fname +" Attendance Date: " +Adte.toString() + " Status: " +St+ " Course name : " +Cname);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+}
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+jComboBox1.setVisible(true);
+jComboBox2.setVisible(false);
+jComboBox2.setSelectedIndex(0);
+jComboBox1.enable();
+
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,16 +296,19 @@ public class AttendanceReport extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceReport().setVisible(true);
+                Owin.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     // End of variables declaration//GEN-END:variables
 }
