@@ -10,6 +10,9 @@
  */
 public class AttendanceF2 extends javax.swing.JFrame {
 
+    
+    public static AttendanceF2  Owin =  new AttendanceF2();
+
     /**
      * Creates new form AttendanceF2
      */
@@ -36,8 +39,18 @@ public class AttendanceF2 extends javax.swing.JFrame {
         jLabel1.setText("User Type: Instructor ");
 
         jButton1.setText("Add Excuse for Student ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Print Attendance Report");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Attendance System");
 
@@ -77,6 +90,26 @@ public class AttendanceF2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+Excuse.Owin.setVisible(true);
+Owin.setVisible(false);
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+AttendanceReport.Owin.setVisible(true);
+Owin.setVisible(false);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -107,7 +140,7 @@ public class AttendanceF2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceF2().setVisible(true);
+               Owin.setVisible(true);
             }
         });
     }
