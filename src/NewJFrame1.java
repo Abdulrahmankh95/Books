@@ -60,7 +60,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("user name");
+        jLabel1.setText("username");
 
         jLabel2.setText("password");
 
@@ -85,7 +85,7 @@ public class NewJFrame1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addComponent(jLabel3)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
