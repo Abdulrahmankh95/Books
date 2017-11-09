@@ -10,6 +10,12 @@
  */
 public class AttendanceF1 extends javax.swing.JFrame {
 
+    
+    
+    public static int check=0;
+public static AttendanceF1  Owin =  new AttendanceF1();
+
+    
     /**
      * Creates new form AttendanceF1
      */
@@ -26,6 +32,7 @@ public class AttendanceF1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -39,6 +46,7 @@ public class AttendanceF1 extends javax.swing.JFrame {
 
         jLabel2.setText("User Type: ");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Instructor");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,11 +54,18 @@ public class AttendanceF1 extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Student");
 
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("System Admin ");
 
         jButton1.setText("Next");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +115,40 @@ public class AttendanceF1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+
+if (jRadioButton1.isSelected()== true){
+            check=1;
+        
+        } 
+        else if (jRadioButton2.isSelected()== true){
+        check=2;
+        
+        
+        }
+  
+  else if (jRadioButton3.isSelected()== true){
+        check=3;
+        
+        
+        }
+        
+          
+        
+        
+       
+        AttendanceLogIn.Owin.setVisible(true);
+         
+         Owin.setVisible(false);
+
+       
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -130,12 +179,14 @@ public class AttendanceF1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceF1().setVisible(true);
+               Owin.setVisible(true);
+
             }
         });
     }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
