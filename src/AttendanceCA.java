@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +20,9 @@
  */
 public class AttendanceCA extends javax.swing.JFrame {
 
+    
+        public static AttendanceCA Owin = new AttendanceCA();
+    
     /**
      * Creates new form AttendanceCA
      */
@@ -64,6 +77,11 @@ public class AttendanceCA extends javax.swing.JFrame {
         jLabel9.setText("User Type: System Admin ");
 
         jButton1.setText("Create Account ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,6 +162,55 @@ public class AttendanceCA extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Statement st = null;
+        Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "attendance";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+
+
+    
+        try {
+            rs = st.executeQuery("insert into users values('"+jTextField1.getText().toString()+"','"+jTextField2.getText().toString()+"','"+jTextField3.getText().toString()+"','"+jTextField4.getText().toString()+"','"+jTextField5.getText().toString()+"','"+jTextField6.getText().toString()+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+   JOptionPane.showMessageDialog(null, "Account Created ");
+
+   
+ 
+
+
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,7 +241,7 @@ public class AttendanceCA extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceCA().setVisible(true);
+               Owin.setVisible(true);
             }
         });
     }
