@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,9 +47,14 @@ public class AttendanceHistory extends javax.swing.JFrame {
 
         jLabel2.setText("Attendance System ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course", "CPIT 440", "CPIT 330", "CPIS 428" }));
 
         jButton1.setText("My Attendance History");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +92,74 @@ public class AttendanceHistory extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+String course;
+
+Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "attendance";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+Statement st = null;
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+ 
+course= jComboBox1.getSelectedItem().toString();
+if (course.contains("choose")==false){
+     
+     try {
+            
+                rs = st.executeQuery("select * from attendance where Course_name =  "+"'"+course+"'" );
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        try {
+            while (rs.next()) {
+               Date Adte=rs.getDate(1);
+                String St=rs.getString(2).toString();
+                String Cname = rs.getString(3).toString();
+               String Fname = rs.getString(4).toString();
+
+ 
+                 
+
+                  
+                
+                
+                System.out.println(" Student Name: " + Fname +" Attendance Date: " +Adte.toString() + " Status: " +St+ " Course name : " +Cname);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+} 
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
