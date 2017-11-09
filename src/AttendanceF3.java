@@ -10,6 +10,10 @@
  */
 public class AttendanceF3 extends javax.swing.JFrame {
 
+    
+    public static  AttendanceF3 Owin = new AttendanceF3();
+
+    
     /**
      * Creates new form AttendanceF3
      */
@@ -38,8 +42,18 @@ public class AttendanceF3 extends javax.swing.JFrame {
         jLabel2.setText("Attendance System ");
 
         jButton1.setText("Create New Account ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Delete Existing Account");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +91,29 @@ public class AttendanceF3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+
+AttendanceCA.Owin.setVisible(true);
+Owin.setVisible(false);
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+AttendanceDA.Owin.setVisible(true);
+Owin.setVisible(false);
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -107,7 +144,8 @@ public class AttendanceF3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceF3().setVisible(true);
+               Owin.setVisible(true);
+
             }
         });
     }
