@@ -155,6 +155,7 @@ while(!student_id.equals(b)){
         if(student_id.equals(b)){
         
             System.out.println(" Match is found: ");
+            System.out.println(student_id);
         ch=true;
         }else{
         

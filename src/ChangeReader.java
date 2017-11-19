@@ -1,3 +1,13 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +20,86 @@
  */
 public class ChangeReader extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ChangeReader
-     */
+      
+   public static ChangeReader  Owin =  new ChangeReader();
+  
+    
     public ChangeReader() {
         initComponents();
+        rname();
+    }
+    
+    
+    public  void rname(){
+    Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "parking";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+Statement st1 = null;
+        try {
+            st1 = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs1 = null;
+  
+    
+      try {
+            rs1 = st1.executeQuery("select READER_ID from gates" );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs1.next()) {
+                String rname = rs1.getString(1).toString();
+
+                 
+             jComboBox1.addItem(rname);
+      
+              //  System.out.println("Course name : " +Cname);
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+        
+         
+       
+       
+       
+       
+       
+       
+       
+       
+    
+       
+       
+       
+       
+       
+       
+       
+       
     }
 
     /**
@@ -26,72 +111,168 @@ public class ChangeReader extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Parking System ");
+        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setText("User Type: Admin");
+        jComboBox1.setBackground(new java.awt.Color(255, 204, 51));
+        jComboBox1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Damaged Reader" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Damaged Reader", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setText("Enter new Reader ID: ");
-
+        jButton1.setBackground(new java.awt.Color(255, 204, 51));
+        jButton1.setFont(new java.awt.Font("Times New Roman", 3, 20)); // NOI18N
         jButton1.setText("Change");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setBackground(new java.awt.Color(0, 102, 153));
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 20)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Enter new reader ID: ");
+        jLabel11.setToolTipText("");
+
+        jLabel9.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Parking System");
+        jLabel9.setToolTipText("");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\3badi\\Desktop\\parking.JPG")); // NOI18N
+
+        jLabel12.setBackground(new java.awt.Color(0, 102, 153));
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("User type: Admin");
+        jLabel12.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox1, 0, 235, Short.MAX_VALUE)
+                            .addComponent(jTextField1))
+                        .addGap(160, 160, 160))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(104, 104, 104))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(134, 134, 134))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(224, 224, 224))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(319, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addGap(32, 32, 32)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(549, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(183, 183, 183))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(170, 170, 170))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "parking";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+ 
+Statement st = null;
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null; 
+        
+        
+        if(!jComboBox1.getSelectedItem().toString().contains("Choose") ){
+        
+            if (!jTextField1.getText().toString().equals("")){
+ try {
+            rs = st.executeQuery("update gates set Reader_ID='"+jTextField1.getText().toString()+"' where Reader_ID='"+jComboBox1.getSelectedItem().toString()+"'" );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          JOptionPane.showMessageDialog(null, "Reader Changed ");  
+        }else
+          JOptionPane.showMessageDialog(null, "Enter new Reader ID  ");  
+        }else
+          JOptionPane.showMessageDialog(null, "Choose a reader  ");  
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +312,11 @@ public class ChangeReader extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

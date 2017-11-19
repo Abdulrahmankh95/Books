@@ -8,26 +8,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author ahmed aljohani
- */
-public class Atin_admin {
-    
+
+public class ParkingAdmin {
+ 
     int id;
     String first_name;
     String last_name;
     String username;
     String email;
-    String password;
-    
-    
+    String password;   
     
      public static boolean Log_in(String username,String passw) throws SQLException{
        String uname="" ;
@@ -41,24 +31,24 @@ public class Atin_admin {
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Atin_admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParkingAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
         String sid = "SSBR";
         String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-        String Username = "attendance";
+        String Username = "parking";
         String password = "tiger";
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(Atin_admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParkingAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
          
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(Atin_admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParkingAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
   
@@ -74,14 +64,14 @@ public class Atin_admin {
 
                 
 
-                           
+                            
             }
             
             
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(Atin_admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParkingAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -92,14 +82,11 @@ public class Atin_admin {
         ch=true;
         }
         else{
-        
          JOptionPane.showMessageDialog(null," Wrong Password or Username " );
         }
         return ch;
 }
     
-    
-    
-    
+  
     
 }

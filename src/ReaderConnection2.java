@@ -32,18 +32,21 @@ public class ReaderConnection2 extends Thread   {
 
     String tag;
     public static String f;
-    public static int k=0;
+    public static int k=0,count=0;
     public static String time;
     public static String[] sd= new String[10];
     public static String[] ed = new String[10];
     public static String[] cid= new String[10];
-    
+    public static AlienClass1Reader reader;
     
     public static Date Tagtime;
     
-public ReaderConnection2(String mn,String kn, String kj) throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
-k++;
+public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader1) throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
+
     
+    
+    k++;
+  reader=reader1;  
  sd[k]= mn;
  ed[k]= kn;
  cid[k]= kj;
@@ -75,7 +78,21 @@ k++;
     }
 
     public static void gettag(String start, String end, String course_id) throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, SQLException, InterruptedException {
- String tagListo="";
+ 
+        
+        
+        
+        
+
+       
+       
+        
+         
+        
+        
+        
+        
+        String tagListo="";
   String tagList;
 
 
@@ -119,33 +136,30 @@ ResultSet rs2 = null;
 ResultSet rs3 = null;
 ResultSet rs4 = null; 
 
+  
+         
 
 
 while(true){
+
     
 Date sysdate = new Date();
    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
         time = localDateFormat.format(sysdate);
         
         System.out.println(time);
-        
+        try{
+            System.out.println("wadea");
         if (start.equals(time)){
             
-              
+               System.out.println("ahmed");
             
 while(!end.equals(Tagtime)){
         try {
             
            
             
-   AlienClass1Reader reader = new AlienClass1Reader(); 
-reader.setConnection("192.168.1.5", 23); 
-reader.setUsername("alien"); 
-reader.setPassword("password"); 
 
-       
-        reader.open();
-         
  
 
       
@@ -155,37 +169,69 @@ reader.setPassword("password");
        Tagtime= reader.getTime(); 
          
         time = localDateFormat.format(Tagtime);
-        System.out.println(time);
+        System.out.println(time+Thread.currentThread().getName());
         
         System.out.println(Tagtime);
       String t5=" ";
       String studentname=null;
- rs3 = st2.executeQuery("select Course_Name from course where Course_Id='"+course_id+"' ");
-       while(rs3.next()){
-              t5 = rs3.getString(1);
+ rs = st.executeQuery("select Course_Name from course where Course_Id='"+course_id+"' ");
+       while(rs.next()){
+              t5 = rs.getString(1);
         
        }
 
- 
+
             
-       rs = st.executeQuery("select Courses,Student_Id,First_Name,Last_Name from student ");
-        while (rs.next()) {
-             String t = rs.getString(1);
-             String Stid=rs.getString(2).toString();
-             String FN=rs.getString(3).toString();
-             String LN=rs.getString(4).toString();
-           if(t.contains(course_id)){
+       rs2 = st2.executeQuery("select Courses,Student_Id,First_Name,Last_Name from student ");
+        while (rs2.next()) {
+             String t = rs2.getString(1);
+             String Stid=rs2.getString(2).toString();
+             String FN= rs2.getString(3).toString();
+                     
+             String LN= rs2.getString(4).toString();
+                 
+          
+            
+             
+             if(t.contains(course_id)){
+                 
                  if(Stid.equals(tagList)){
-                  rs3 = st4.executeQuery("select STUDENT_NAME from attendance");
-                   while (rs.next()) {
-                    studentname = rs.getString(1);
+                                      
+                          if(count!=0){
+                  rs3 = st3.executeQuery("select STUDENT_NAME from attendance");
+                                
+                          boolean x=false;       
+                  while (rs3.next()) {
+                                      
+
+                    studentname = rs3.getString(1);
+                  
+                       
+                         
+                             if(studentname.equals(FN+ " "+LN))
+                             {
+                             x=true;
+                             
+                             
+                                 
+                         } 
+                  }
+                       if(x!=true){
+                                            
+
+          rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
+                          
+
                    
                        
                    }
                    
-                   if(studentname!= FN+" "+LN){
-         rs2 = st3.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
-                   }
+                                  
+                          }else{
+                          rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
+                         
+                          count++;
+                                  }
                  }
            }
          
@@ -199,12 +245,21 @@ reader.setPassword("password");
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
+            
            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+
        }
+        }catch(NullPointerException e){
+                
+            System.out.println(Thread.currentThread().getName());
+            
+                }  
+        
+         
       Thread.sleep(60000);
 } 
     }

@@ -18,7 +18,7 @@ public class ReaderConnection {
 public static String gettag() throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException{
 
 AlienClass1Reader reader = new AlienClass1Reader(); 
-reader.setConnection("192.168.1.2", 23); 
+reader.setConnection("192.168.1.3", 23); 
 reader.setUsername("alien"); 
 reader.setPassword("password"); 
 

@@ -1,4 +1,5 @@
 
+import com.alien.enterpriseRFID.reader.AlienClass1Reader;
 import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
 import com.alien.enterpriseRFID.reader.AlienReaderException;
 import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
@@ -21,6 +22,14 @@ public class Attendance {
 
   public static void Time () throws SQLException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException{
   
+      
+      
+                  AlienClass1Reader reader = new AlienClass1Reader(); 
+reader.setConnection("192.168.1.3", 23); 
+reader.setUsername("alien"); 
+reader.setPassword("password"); 
+
+     reader.open();
   Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
@@ -63,7 +72,7 @@ Statement st = null;
                 System.out.println(t1);
                 System.out.println(cid);
  
-                new ReaderConnection2(t,t1,cid).start();
+                new ReaderConnection2(t,t1,cid,reader).start();
                 
 //             SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 //        String time = localDateFormat.format(t);
