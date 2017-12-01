@@ -172,10 +172,12 @@ try {
 }
 else if (ch == 2){
     try {
-        students.Log_in(jTextField1.getText(),jTextField2.getText());
+      tr=  students.Log_in(jTextField1.getText(),jTextField2.getText());
+        if (tr==true){
         AttendanceHistory nwin = new AttendanceHistory();
         nwin.setVisible(true);
         Owin.setVisible(false);
+        }
     } catch (SQLException ex) {
         Logger.getLogger(AttendanceLogIn.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -185,10 +187,11 @@ else if (ch == 2){
 
 else if (ch == 3){
     try {
-        Atin_admin.Log_in(jTextField1.getText(),jTextField2.getText());
-       
+      tr=  Atin_admin.Log_in(jTextField1.getText(),jTextField2.getText());
+         if (tr==true){
         AttendanceF3.Owin.setVisible(true);
         Owin.setVisible(false);
+         }
     } catch (SQLException ex) {
         Logger.getLogger(AttendanceLogIn.class.getName()).log(Level.SEVERE, null, ex);
     }

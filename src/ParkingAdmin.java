@@ -60,7 +60,11 @@ public class ParkingAdmin {
             while (rs.next()) {
                uname = rs.getString(1).toString();
                 pass = rs.getString(2).toString();
-                
+               
+                 if (username.equals(uname) && passw.equals(pass)){
+        
+                 ch=true;
+        }
 
                 
 
@@ -77,11 +81,8 @@ public class ParkingAdmin {
         
         
         
-        if (username.equals(uname) && passw.equals(pass)){
-        
-        ch=true;
-        }
-        else{
+       
+        if(ch==false){
          JOptionPane.showMessageDialog(null," Wrong Password or Username " );
         }
         return ch;

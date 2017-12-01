@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -70,7 +71,10 @@ public class instructor {
                uname = rs.getString(1).toString();
                 pass = rs.getString(2).toString();
                 
-
+          if (username.equals(uname) && passw.equals(pass)){
+        
+        ch=true;
+        }
                 
 
                            
@@ -86,13 +90,11 @@ public class instructor {
         
         
         
-        if (username.equals(uname) && passw.equals(pass)){
+       
+        if(ch==false){
         
-        ch=true;
-        }
-        else{
-        
-            System.out.println("wrong password");
+         JOptionPane.showMessageDialog(null," Wrong Password or Username " );
+
         }
         return ch;
 }

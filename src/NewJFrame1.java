@@ -173,10 +173,12 @@ try {
 }
 else {
     try {
-        Admin.Log_in(jTextField1.getText(),jTextField2.getText());
+       tr= Admin.Log_in(jTextField1.getText(),jTextField2.getText());
+       if (tr==true){
         CreateAccount nwin = new CreateAccount();
         nwin.setVisible(true);
         Owin.setVisible(false);
+       }
     } catch (SQLException ex) {
         Logger.getLogger(NewJFrame1.class.getName()).log(Level.SEVERE, null, ex);
     }

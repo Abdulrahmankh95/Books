@@ -30,7 +30,7 @@ public class Atin_admin {
     
     
      public static boolean Log_in(String username,String passw) throws SQLException{
-       String uname="" ;
+        String uname="" ;
         String pass ="";
         boolean ch=false;
         
@@ -71,7 +71,10 @@ public class Atin_admin {
                uname = rs.getString(1).toString();
                 pass = rs.getString(2).toString();
                 
-
+             if (username.equals(uname) && passw.equals(pass)){
+        
+              ch=true;
+        }
                 
 
                            
@@ -87,11 +90,8 @@ public class Atin_admin {
         
         
         
-        if (username.equals(uname) && passw.equals(pass)){
         
-        ch=true;
-        }
-        else{
+        if(ch==false){
         
          JOptionPane.showMessageDialog(null," Wrong Password or Username " );
         }

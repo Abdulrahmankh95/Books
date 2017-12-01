@@ -22,6 +22,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -203,7 +204,10 @@ public class Librarian {
                uname = rs.getString(1).toString();
                 pass = rs.getString(2).toString();
                 
-
+ if (username.equals(uname) && passw.equals(pass)){
+        
+        ch=true;
+        }
                 
 
                            
@@ -217,15 +221,12 @@ public class Librarian {
         }
 
         
+         
         
+       
+        if(ch==false){
         
-        if (username.equals(uname) && passw.equals(pass)){
-        
-        ch=true;
-        }
-        else{
-        
-            System.out.println("wrong password");
+           JOptionPane.showMessageDialog(null," Wrong Password or Username " );
         }
         return ch;
 }

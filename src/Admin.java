@@ -76,10 +76,10 @@ public class Admin {
     }
     
     
-    public static void Log_in(String username,String passw) throws SQLException{
+    public static boolean Log_in(String username,String passw) throws SQLException{
        String uname="" ;
         String pass ="";
-        
+        boolean ch = false;
         Statement st = null;
         Connection conn = null;
 
@@ -118,6 +118,10 @@ public class Admin {
                 pass = rs.getString(2).toString();
                 
 
+               if (username.equals(uname) && passw.equals(pass)){
+        ch=true;
+        
+        }
                 
 
                  
@@ -132,16 +136,12 @@ public class Admin {
         }
  
         
-               if (username.equals(uname) && passw.equals(pass)){
-        
-        
-        }
-        else{
+        if(ch==false){
          JOptionPane.showMessageDialog(null," Wrong Password or Username " );
             
         }
         
-       
+       return ch;
 }
        
         

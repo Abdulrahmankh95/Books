@@ -1,4 +1,9 @@
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -7,7 +12,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,6 +41,8 @@ public class AttendanceReport extends javax.swing.JFrame {
      */
     public AttendanceReport() {
         initComponents();
+        Sname();
+        Cname();
     }
 
     /**
@@ -57,7 +73,7 @@ public class AttendanceReport extends javax.swing.JFrame {
         jComboBox1.setBackground(new java.awt.Color(0, 102, 153));
         jComboBox1.setFont(new java.awt.Font("Times New Roman", 3, 20)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 204, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Student", "Abdulrahman Khoshaim", "Khalid", "Faris" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Student" }));
         jComboBox1.setEnabled(false);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +84,7 @@ public class AttendanceReport extends javax.swing.JFrame {
         jComboBox2.setBackground(new java.awt.Color(0, 102, 153));
         jComboBox2.setFont(new java.awt.Font("Times New Roman", 3, 20)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(255, 204, 51));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course", "CPIT 440", "CPIT 330", "CPIS 428" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Course" }));
         jComboBox2.setEnabled(false);
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,24 +251,73 @@ if (student.contains("Choose")==false){
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
+            FileOutputStream outputStream = new FileOutputStream("Attendance.xls");
+                File ff = new File("Attendance.xls");
+
+        Workbook wb = new HSSFWorkbook();
+        Font f = wb.createFont();
+        f.setColor(IndexedColors.WHITE.index);
+        f.setBold(true);
+        Sheet sh = wb.createSheet("Attendance");
+        
+        Cell c = sh.createRow(0).createCell(0);
+        Cell c1 = sh.createRow(0).createCell(1);
+        Cell c2 = sh.createRow(0).createCell(2);
+        Cell c3 = sh.createRow(0).createCell(3);
+        CellStyle cs= wb.createCellStyle();
+        
+        cs.setFillForegroundColor(IndexedColors.GOLD.index);
+        cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cs.setFont(f);
+        c.setCellStyle(cs);
+        c.setCellValue("Student Name:");
+        c1.setCellStyle(cs);
+        c1.setCellValue("Attendance Date:");
+        c2.setCellStyle(cs);
+        c2.setCellValue("Status:");
+        c3.setCellStyle(cs);
+        c3.setCellValue("Course name:");
+        int x=1,y=0;
+            
             while (rs.next()) {
                Date Adte=rs.getDate(1);
                 String St=rs.getString(2).toString();
                 String Cname = rs.getString(3).toString();
                String Fname = rs.getString(4).toString();
 
+                      Row r= sh.createRow(x);
+              
+              r.createCell(y).setCellValue(Fname);
+              y++;
+
+              r.createCell(y).setCellValue(Adte.toString());
+              y++;
+
+              r.createCell(y).setCellValue(St);
+              y++;
+
+              r.createCell(y).setCellValue(Cname);
+              y=0;
+              x++;
 
                  
 
                   
                 
                 
-                System.out.println(" Student Name: " + Fname +" Attendance Date: " +Adte.toString() + " Status: " +St+ " Course name : " +Cname);
                 
             }
+                  wb.write(outputStream);
+        outputStream.close();
+         Desktop d = Desktop.getDesktop();
+        d.open(ff);
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (FileNotFoundException ex) {
+        JOptionPane.showMessageDialog(null, "please close the file to update ");
+    } catch (IOException ex) {
+        Logger.getLogger(AttendanceReport.class.getName()).log(Level.SEVERE, null, ex);
+    }
  
 } 
 else if(course.contains("Choose")==false){
@@ -265,6 +330,33 @@ else if(course.contains("Choose")==false){
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
+             FileOutputStream outputStream = new FileOutputStream("Attendance.xls");
+                File ff = new File("Attendance.xls");
+
+        Workbook wb = new HSSFWorkbook();
+        Font f = wb.createFont();
+        f.setColor(IndexedColors.WHITE.index);
+        f.setBold(true);
+        Sheet sh = wb.createSheet("Attendance");
+        
+        Cell c = sh.createRow(0).createCell(0);
+        Cell c1 = sh.createRow(0).createCell(1);
+        Cell c2 = sh.createRow(0).createCell(2);
+        Cell c3 = sh.createRow(0).createCell(3);
+        CellStyle cs= wb.createCellStyle();
+        
+        cs.setFillForegroundColor(IndexedColors.GOLD.index);
+        cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cs.setFont(f);
+        c.setCellStyle(cs);
+        c.setCellValue("Student Name:");
+        c1.setCellStyle(cs);
+        c1.setCellValue("Attendance Date:");
+        c2.setCellStyle(cs);
+        c2.setCellValue("Status:");
+        c3.setCellStyle(cs);
+        c3.setCellValue("Course name:");
+        int x=1,y=0;
             while (rs.next()) {
                Date Adte=rs.getDate(1);
                 String St=rs.getString(2).toString();
@@ -273,16 +365,39 @@ else if(course.contains("Choose")==false){
 
  
                  
+      Row r= sh.createRow(x);
+              
+              r.createCell(y).setCellValue(Fname);
+              y++;
+
+              r.createCell(y).setCellValue(Adte.toString());
+              y++;
+
+              r.createCell(y).setCellValue(St);
+              y++;
+
+              r.createCell(y).setCellValue(Cname);
+              y=0;
+              x++;
+
+                 
 
                   
                 
                 
-                System.out.println(" Student Name: " + Fname +" Attendance Date: " +Adte.toString() + " Status: " +St+ " Course name : " +Cname);
                 
             }
+                  wb.write(outputStream);
+        outputStream.close();
+         Desktop d = Desktop.getDesktop();
+        d.open(ff);
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (FileNotFoundException ex) {
+        JOptionPane.showMessageDialog(null, "please close the file to update ");
+    } catch (IOException ex) {
+        Logger.getLogger(AttendanceReport.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
 }
 
@@ -297,6 +412,115 @@ jComboBox1.enable();
 
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    
+    public  void Sname(){
+  
+Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "attendance";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+Statement st = null;
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+    
+      try {
+            rs = st.executeQuery("select FIRST_NAME,LAST_NAME from STUDENT " );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+                String fname = rs.getString(1).toString();
+                String lname = rs.getString(2).toString();
+                 
+             jComboBox1.addItem(fname+" "+lname);
+       
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    }
+    
+    
+    public  void Cname(){
+  
+Connection conn = null;
+
+        String DriverName = "oracle.jdbc.driver.OracleDriver";
+        try {
+            Class.forName(DriverName);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ServerName = "DESKTOP-L9V4O19";
+        String ServerPort = "1521";
+        String sid = "SSBR";
+        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
+        String Username = "attendance";
+        String password = "tiger";
+        try {
+            conn = DriverManager.getConnection(url, Username, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+Statement st = null;
+        try {
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet rs = null;
+  
+    
+      try {
+            rs = st.executeQuery("select Course_name from course " );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while (rs.next()) {
+                String Cname = rs.getString(1).toString();
+
+                 
+             jComboBox2.addItem(Cname);
+    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    }
+    
+    
+    
+    
+    
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed

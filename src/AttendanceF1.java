@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ */ 
 
 /**
  *
@@ -22,7 +22,7 @@ public static AttendanceF1  Owin =  new AttendanceF1();
     public AttendanceF1() {
         initComponents();
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
