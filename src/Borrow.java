@@ -295,30 +295,28 @@ if(db == JOptionPane.YES_OPTION){
                
                if(  rss.getString(1).equals(book)){
                check18=false;
-               }
+            }
                
-               }
-           } catch (SQLException ex) {
+            }
+               }catch (SQLException ex) {
                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
-           }
+            }
 
      
-                  if(check18 == true){
+               if(check18 == true){
                   try {
-                      rss = st.executeQuery("insert into borrowing values(1,SYSDATE,(SYSDATE + 10),'"+book+"','"+student+"')  ");
+               rss = st.executeQuery("insert into borrowing values(1,SYSDATE,(SYSDATE + 10),'"+book+"','"+student+"')  ");
                   } catch (SQLException ex) {
                       Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
                   }
                    student="";
-              book="";
-              ch1=false;
-              ch2=false;
+                   book="";
+                   ch1=false;
+                   ch2=false;
                    JOptionPane.showMessageDialog(null," Borrowing confirmed" );
                   }else{
-                  
-                  
                   JOptionPane.showMessageDialog(null," Book already borrowed" );
-     student="";
+              student="";
               book="";
               ch1=false;
               ch2=false;

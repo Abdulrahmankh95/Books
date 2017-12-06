@@ -44,10 +44,10 @@ public class Parking extends Thread   {
 public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
 
  
-
+ 
   
-}
-
+} 
+ 
 
     public void run() {
 
@@ -143,52 +143,37 @@ while(true){
             
  
     tagList = reader.getTagID();
-    
-     if(tagList!=null){
-            
+     if(tagList!=null){ 
       rs = st.executeQuery("select GATE_NUM from student where STUDENT_ID='"+tagList+"' ");
-
         while (rs.next()) {
               GAN = rs.getString(1);
-     
-         
         }
           rs2 = st2.executeQuery("select GATE_NUM,COLLEGE_NAME from gates where READER_ID='"+RID+"' ");
 
                    while (rs2.next()) {
                  GAN2 = rs2.getString(1);
                  CON = rs2.getString(2);
-
-                 
                    }
+                    
                    String sd = null;
-                    rs4 = st4.executeQuery("select STUDENT_ID from PARKING ");
+                   rs4 = st4.executeQuery("select STUDENT_ID from PARKING ");
 
                    while (rs4.next()) {
-                 sd = rs4.getString(1);
-            
-
-                 
+                   sd = rs4.getString(1);
                    }
-                   
+           
                    if(!sd.equals(tagList)){
                    
                    if(GAN.contains(GAN2)){
-                   
-                   
                    rs3 = st3.executeQuery("insert into parking values('Success',sysdate,'"+GAN2+"','"+tagList+"','"+CON+"')");
                          JOptionPane.showMessageDialog(null, "Gate opened ");
- 
-         
                    }else {
                 rs3 = st3.executeQuery("insert into parking values('Fail',sysdate,'"+GAN2+"','"+tagList+"','"+CON+"')");
                           JOptionPane.showMessageDialog(null, "Not Authrized ");
 
                    } 
-                   }
- 
-                   
-     }     
+                   }          
+           }     
                    
         } catch (AlienReaderTimeoutException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);

@@ -24,14 +24,14 @@ public class Attendance {
   
       
       
-                  AlienClass1Reader reader = new AlienClass1Reader(); 
-reader.setConnection("192.168.1.3", 23); 
-reader.setUsername("alien"); 
-reader.setPassword("password"); 
+         AlienClass1Reader reader = new AlienClass1Reader(); 
+         reader.setConnection("192.168.1.3", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
 
-     reader.open();
-  Connection conn = null;
-
+         reader.open();
+         
+        Connection conn = null;
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
@@ -51,7 +51,7 @@ reader.setPassword("password");
         }
           
 
-Statement st = null;
+        Statement st = null;
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
@@ -59,7 +59,6 @@ Statement st = null;
         }
         ResultSet rs = null;
       
-        
         rs = st.executeQuery("select Start_Time,End_Time,COURSE_ID from schedule");
         try {
             while (rs.next()) {
@@ -67,27 +66,19 @@ Statement st = null;
             String  t1 = rs.getString(2);
             String  cid = rs.getString(3);
 
-            
                 System.out.println(t);
                 System.out.println(t1);
                 System.out.println(cid);
  
                 new ReaderConnection2(t,t1,cid,reader).start();
                 
-//             SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
-//        String time = localDateFormat.format(t);
-//        System.out.println(time);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
   
   
-  
-  
-  
-  
-  }   
+      }   
     
 
     

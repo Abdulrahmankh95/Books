@@ -29,10 +29,9 @@ public class Borrowing {
      String Status;
      
      public static boolean borrowing2 (String a,boolean ch) throws SQLException{
-     
        Statement st = null;
         Connection conn = null;
-
+        
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
@@ -57,19 +56,12 @@ public class Borrowing {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      
         ResultSet rs = null;
-        
          String book_id=" ";
-        while(!book_id.equals(a)){
-   
          
-
-
-    
+        while(!book_id.equals(a)){
         rs = st.executeQuery("select book_id from book ");
-       
-        
+      
         while(rs.next()){
             
          book_id = rs.getNString(1).toString();
@@ -77,8 +69,6 @@ public class Borrowing {
          break;
         }
          
-          
-
         if(book_id.equals(a)){
         
             System.out.println(" Match is found: ");
@@ -86,23 +76,16 @@ public class Borrowing {
         
         }else{
         
-             System.out.println(" Error ");
-break;
+            System.out.println(" Error ");
+             break;
         }
         
         }
-        return ch;
-     
+        return ch;  
      }
      
      public static boolean Borrwowing(String b,boolean ch) throws SQLException{
-         // String taglist = TagList;
-
-         
-           
-
-          
-         
+  
          Statement st = null;
         Connection conn = null;
 
@@ -129,48 +112,32 @@ break;
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-      
-        
         ResultSet rss = null;
         
         String student_id=" ";
   
-while(!student_id.equals(b)){
-
-    
+        while(!student_id.equals(b)){
+            
         rss = st.executeQuery("select student_id from student ");
-       
-        
+     
         while(rss.next()){
          student_id = rss.getNString(1).toString();
         if(student_id.equals(b))
             break;
-          
-        
         }
          
-          
- 
         if(student_id.equals(b)){
         
             System.out.println(" Match is found: ");
             System.out.println(student_id);
-        ch=true;
+            ch=true;
         }else{
         
-             System.out.println(" Error ");
-break;
-        }
-         
-     
-     
-     
+            System.out.println(" Error ");
+            break;
+        }    
 }
-     
-     
-     return ch;
-     
+           return ch;
      }
 
     public int getBook_tag() {

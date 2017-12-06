@@ -43,18 +43,13 @@ public class ReaderConnection2 extends Thread   {
     
 public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader1) throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
 
-    
-    
-    k++;
-  reader=reader1;  
+ k++;
+ reader=reader1;  
  sd[k]= mn;
  ed[k]= kn;
  cid[k]= kj;
  
-
-  
 }
-
 
     public void run() {
 
@@ -73,31 +68,14 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
       
-        
-
     }
 
     public static void gettag(String start, String end, String course_id) throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, SQLException, InterruptedException {
- 
-        
-        
-        
-        
 
-       
-       
-        
-         
-        
-        
-        
-        
         String tagListo="";
-  String tagList;
+        String tagList;
 
-
-
-  Connection conn = null;
+        Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
@@ -118,10 +96,11 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
         }
             
 
-Statement st = null;
-Statement st2 = null;
-Statement st3 = null;
-Statement st4 = null;
+        Statement st = null;
+        Statement st2 = null;
+        Statement st3 = null;
+        Statement st4 = null;
+        
         try {
             st = conn.createStatement();
             st2 = conn.createStatement();
@@ -132,110 +111,73 @@ Statement st4 = null;
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
-ResultSet rs2 = null;
-ResultSet rs3 = null;
-ResultSet rs4 = null; 
+        ResultSet rs2 = null;
+        ResultSet rs3 = null;
+        ResultSet rs4 = null; 
 
-  
+        while(true){
+            
+          Date sysdate = new Date();
+          SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+          time = localDateFormat.format(sysdate);
+          System.out.println(time);
+          try{
+          if (start.equals(time)){  
+            
+          while(!end.equals(Tagtime)){
+          try {
+
+          tagList = reader.getTagID();
+          Tagtime= reader.getTime(); 
          
-
-
-while(true){
-
-    
-Date sysdate = new Date();
-   SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
-        time = localDateFormat.format(sysdate);
+          time = localDateFormat.format(Tagtime);
+          System.out.println(time+Thread.currentThread().getName());
         
-        System.out.println(time);
-        try{
-            System.out.println("wadea");
-        if (start.equals(time)){
-            
-               System.out.println("ahmed");
-            
-while(!end.equals(Tagtime)){
-        try {
-            
-           
-            
-
- 
-
-      
-      tagList = reader.getTagID();
-     
-        
-       Tagtime= reader.getTime(); 
+          System.out.println(Tagtime);
+          String t5=" ";
+          String studentname=null;
+          rs = st.executeQuery("select Course_Name from course where Course_Id='"+course_id+"' ");
          
-        time = localDateFormat.format(Tagtime);
-        System.out.println(time+Thread.currentThread().getName());
-        
-        System.out.println(Tagtime);
-      String t5=" ";
-      String studentname=null;
- rs = st.executeQuery("select Course_Name from course where Course_Id='"+course_id+"' ");
-       while(rs.next()){
-              t5 = rs.getString(1);
-        
+          while(rs.next()){
+          t5 = rs.getString(1);
        }
 
 
             
-       rs2 = st2.executeQuery("select Courses,Student_Id,First_Name,Last_Name from student ");
-        while (rs2.next()) {
+          rs2 = st2.executeQuery("select Courses,Student_Id,First_Name,Last_Name from student ");
+          while (rs2.next()) {
              String t = rs2.getString(1);
              String Stid=rs2.getString(2).toString();
              String FN= rs2.getString(3).toString();
-                     
              String LN= rs2.getString(4).toString();
-                 
           
-            
-             
              if(t.contains(course_id)){
                  
                  if(Stid.equals(tagList)){
                                       
                           if(count!=0){
-                  rs3 = st3.executeQuery("select STUDENT_NAME from attendance");
-                                
-                          boolean x=false;       
-                  while (rs3.next()) {
-                                      
-
-                    studentname = rs3.getString(1);
+                  rs3 = st3.executeQuery("select STUDENT_NAME from attendance");      
+                  boolean x=false;  
                   
-                       
-                         
-                             if(studentname.equals(FN+ " "+LN))
-                             {
-                             x=true;
-                             
-                             
-                                 
-                         } 
-                  }
-                       if(x!=true){
-                                            
-
-          rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
-                          
-
-                   
-                       
-                   }
-                   
-                                  
-                          }else{
-                          rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
-                         
-                          count++;
-                                  }
-                 }
+                  while (rs3.next()) {
+                    studentname = rs3.getString(1);           
+                  
+                    if(studentname.equals(FN+ " "+LN)){
+                       x=true;
+                    } 
+           } 
+                    if(x!=true){
+                    rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");
+           
+                    }
+                    }else{
+                    rs4 = st4.executeQuery("insert into attendance values(sysdate,'Present','"+t5+"','"+FN+" "+LN+"')");   
+                    count++;
+                    }
+             }
            }
          
-        }
+         }
         
         } catch (AlienReaderTimeoutException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,13 +186,13 @@ while(!end.equals(Tagtime)){
         } catch (AlienReaderException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
+          try {
             
            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+     }
 
        }
         }catch(NullPointerException e){
@@ -258,33 +200,12 @@ while(!end.equals(Tagtime)){
             System.out.println(Thread.currentThread().getName());
             
                 }  
-        
-         
-      Thread.sleep(60000);
+            Thread.sleep(60000);
 } 
     }
-    
-    
-    
     
 
     public static void main(String[] args) throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderCommandErrorException, AlienReaderException, SQLException, InterruptedException, Exception {
 
-        
-
-     
-//          System.out.println("Tag(s) found:"); 
-//          for (int i=0; i<tagList.length; i++) { 
-//              Tag tag = tagList[i]; 
-//              System.out.println("ID:" + tag.getTagID() + 
-//                      ", Discovered:" + tag.getDiscoverTime() + 
-//                      ", Last Seen:" + tag.getRenewTime() + 
-//                      ", Antenna:" + tag.getAntenna() + 
-//                      ", Reads:" + tag.getRenewCount()); 
-//                           reader.clearTagList();
-//
-//          }
     }
-
-   
 }
