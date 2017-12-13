@@ -17,29 +17,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
   
- 
 
-
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author 3badi
- */
 public class Borrow extends javax.swing.JFrame {
     String book;
     String student;
     boolean ch1=false,ch2=false;
 
-    /**
-     * Creates new form Borrow
-     */
+   
     public Borrow() {
         initComponents();
     }
@@ -243,7 +227,7 @@ public class Borrow extends javax.swing.JFrame {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
       }catch(Exception e){
-                        JOptionPane.showMessageDialog(null," Tags not found" );
+         JOptionPane.showMessageDialog(null," Tags not found" );
 
       }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -374,6 +358,7 @@ if(db == JOptionPane.YES_OPTION){
            try {
                //System.out.println(student);
                rsss = st.executeQuery("delete from borrowing where book_id='"+book+"'");
+               JOptionPane.showMessageDialog(null," Book returned" );
            } catch (SQLException ex) {
                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
            }   

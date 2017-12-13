@@ -1,16 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-  
- 
 
- 
-/** 
- *
- * @author 3badi
- */
 public class NewJFrame extends javax.swing.JFrame {
 public static boolean check=true;
 public static NewJFrame  Owin =  new NewJFrame();

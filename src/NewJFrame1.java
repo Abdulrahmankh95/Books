@@ -162,10 +162,7 @@ if (ch == true)
 try {
    tr= Librarian.Log_in(jTextField1.getText(),jTextField2.getText());
    if (tr==true){
-   PrintReport Nwin = new PrintReport();
-
-
-   Nwin.setVisible(true);
+   LibrarianFunctions.news.setVisible(true);
     Owin.setVisible(false);
    }
 } catch (SQLException ex) {

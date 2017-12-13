@@ -9,20 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+ 
 
 
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author 3badi
- */
 public class Excuse extends javax.swing.JFrame {
 
     
@@ -226,7 +215,6 @@ Statement st = null;
         ResultSet rss = null;
         
         CN=jComboBox1.getSelectedItem().toString();
-         System.out.println(CN);
      
       try { 
        
@@ -238,7 +226,6 @@ Statement st = null;
        try {
             while (rss.next()) {
                  CID = rss.getString(1).toString();                
-                System.out.println(CID);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
@@ -250,7 +237,7 @@ Statement st = null;
     
       try { 
        
-            rsss = st.executeQuery("select First_name,Courses from student" );
+            rsss = st.executeQuery("select First_name,Last_Name,Courses from student" );
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,12 +246,13 @@ Statement st = null;
            jComboBox2.addItem("Choose Student");
 
             while (rsss.next()) {
-                String SN = rsss.getString(1).toString();  
-                String CR = rsss.getString(2).toString();  
+                String FN = rsss.getString(1).toString(); 
+                String LN = rsss.getString(2).toString();  
+                String CR = rsss.getString(3).toString();  
                   
                 
                 if(CR.contains(CID)){
-                jComboBox2.addItem(SN);
+                jComboBox2.addItem(FN+" " +LN);
 
                 
                 }
@@ -395,7 +383,6 @@ Statement st = null;
                  
              jComboBox1.addItem(Cname);
       
-              //  System.out.println("Course name : " +Cname);
                 
                 
             }

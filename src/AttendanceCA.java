@@ -8,16 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author 3badi
- */
 public class AttendanceCA extends javax.swing.JFrame {
 
     
@@ -220,6 +210,11 @@ public class AttendanceCA extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        
+        
+        
+        
+        
         Statement st = null;
         Connection conn = null;
 
@@ -249,20 +244,21 @@ public class AttendanceCA extends javax.swing.JFrame {
         ResultSet rs = null;
   
 
-
+       if(jTextField1.getText().toString().equals("")||jTextField2.getText().toString().equals("")||jTextField3.getText().toString().equals("")||jTextField4.getText().toString().equals("")||jTextField5.getText().toString().equals("")||jTextField6.getText().toString().equals("")){
       
-        try {
+        JOptionPane.showMessageDialog(null, "Enter Data ");
+
+   
+       }else{
+       try {
             rs = st.executeQuery("insert into users values('"+jTextField1.getText().toString()+"','"+jTextField2.getText().toString()+"','"+jTextField3.getText().toString()+"','"+jTextField4.getText().toString()+"','"+jTextField5.getText().toString()+"','"+jTextField6.getText().toString()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
      
    JOptionPane.showMessageDialog(null, "Account Created ");
-
-   
- 
-
-
+       
+       }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

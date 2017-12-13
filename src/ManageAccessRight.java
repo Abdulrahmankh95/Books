@@ -8,16 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-  
-/**
- *
- * @author 3badi
- */
+
 public class ManageAccessRight extends javax.swing.JFrame {
    
     public static ManageAccessRight  Owin =  new ManageAccessRight();
@@ -74,7 +65,6 @@ Statement st = null;
                  
              jComboBox1.addItem(fname+" "+lname);
       
-              //  System.out.println("Course name : " +Cname);
                 
                 
             }
@@ -150,7 +140,6 @@ Statement st1 = null;
                  
              jComboBox2.addItem(gname);
       
-              //  System.out.println("Course name : " +Cname);
                 
                 
             }
@@ -382,7 +371,6 @@ Statement st2 = null;
                 
        
       
-              //  System.out.println("Course name : " +Cname);
                 
                 
             }
@@ -404,14 +392,13 @@ Statement st2 = null;
                  
        
       
-              //  System.out.println("Course name : " +Cname);
                 
                   
             }
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        if(!OGN.contains(NGN)){
        String GN = OGN+NGN;
       try {
             rs = st.executeQuery("update student set GATE_NUM='"+GN+"' where FIRST_NAME='"+s.substring(0, i)+"'" );
@@ -423,11 +410,17 @@ Statement st2 = null;
 
         
           
-        }else 
-           JOptionPane.showMessageDialog(null, "Choose somthing");
- 
+        }else{
+                   JOptionPane.showMessageDialog(null, "Access is already exist");
 
-        // TODO add your handling code here:
+        }
+       }else{
+                  JOptionPane.showMessageDialog(null, "Choose somthing");
+
+       
+       }
+           
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -493,7 +486,6 @@ Statement st2 = null;
                 
        
       
-              //  System.out.println("Course name : " +Cname);
                 
                 
             }
@@ -523,7 +515,6 @@ Statement st2 = null;
         
           
           
-         System.out.println(OGN.replaceAll(NGN, ""));  
     
          try {
             rs = st.executeQuery("update student set GATE_NUM='"+OGN.replaceAll(NGN, "")+"' where FIRST_NAME='"+s.substring(0, i)+"'" );

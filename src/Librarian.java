@@ -143,7 +143,6 @@ public class Librarian {
      transport.connect(host,user,pass);
      transport.sendMessage(msg, msg.getAllRecipients());
      transport.close();
-         System.out.println("message sent successfully ");
          
      
      
@@ -230,8 +229,9 @@ public class Librarian {
         }
         return ch;
 }
-   
-      public static void main(String[] args) throws MessagingException, SQLException{
+      
+      public static void L_Notify() throws SQLException{
+      
        Statement st = null;
         Connection conn = null;
 
@@ -274,7 +274,6 @@ public class Librarian {
             
 
             if(rs.getDate(1).toString().equals(sdf.format(date).toString())){
-                System.out.println(rs.getDate(1).toString());
                 
 
                 rs2 = st.executeQuery("select email from student where Student_id='"+rs.getString(2)+"'");
@@ -295,10 +294,10 @@ public class Librarian {
         } catch(Exception e){
                     
                     
-                }
-        
+                }   
       
       }
+   
       
       
       

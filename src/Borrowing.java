@@ -7,18 +7,10 @@ import java.sql.Statement;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author ahmed aljohani
- */
 public class Borrowing {
     
      int Book_id;
@@ -71,12 +63,12 @@ public class Borrowing {
          
         if(book_id.equals(a)){
         
-            System.out.println(" Match is found: ");
+                        JOptionPane.showMessageDialog(null," Match is found " );
         ch=true;
         
         }else{
         
-            System.out.println(" Error ");
+                        JOptionPane.showMessageDialog(null," Match not found" );
              break;
         }
         
@@ -122,18 +114,18 @@ public class Borrowing {
      
         while(rss.next()){
          student_id = rss.getNString(1).toString();
-        if(student_id.equals(b))
+        if(student_id.equals(b)) 
             break;
         }
          
         if(student_id.equals(b)){
-        
-            System.out.println(" Match is found: ");
-            System.out.println(student_id);
+       
+            JOptionPane.showMessageDialog(null," Match is found" );
+
             ch=true;
         }else{
         
-            System.out.println(" Error ");
+            JOptionPane.showMessageDialog(null," Match not found" );
             break;
         }    
 }

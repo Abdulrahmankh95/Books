@@ -44,7 +44,7 @@ public class Parking extends Thread   {
 public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
 
  
- 
+  
   
 } 
  

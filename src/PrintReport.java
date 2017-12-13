@@ -38,6 +38,7 @@ public class PrintReport extends javax.swing.JFrame {
     /**
      * Creates new form PrintReport
      */
+   public static PrintReport news = new PrintReport();
     public PrintReport() {
         initComponents();
         Cname();
@@ -230,7 +231,7 @@ public class PrintReport extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-String student,book;
+String student,book,student_id = "";
 
 Connection conn = null;
 
@@ -254,13 +255,19 @@ Connection conn = null;
          
 
 Statement st = null;
+Statement st1 = null;
+
 
         try {
             st = conn.createStatement();
+            st1 = conn.createStatement();
+
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
+        ResultSet rs1 = null;
+
 
   
 
@@ -268,8 +275,35 @@ student= jComboBox1.getSelectedItem().toString();
 book= jComboBox2.getSelectedItem().toString(); 
 
 if (student.contains("Choose")==false){
+    
+     try {
+            rs1 = st1.executeQuery("select STUDENT_ID,FIRST_NAME,LAST_NAME from STUDENT" );
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     try {
+            while (rs1.next()) {
+                String SID = rs1.getString(1).toString();
+                String FN = rs1.getString(2).toString();
+                String LN = rs1.getString(3).toString();
+                
+
+                if(student.equals(FN+" "+LN)){
+            student_id= SID;
+            
+            }
+
+                 
+       
+    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
       try {
-            rs = st.executeQuery("select Student.First_name,Student.Last_name,Borrowing.Start_date,Borrowing.End_date,Book.title from(( Borrowing inner join Student on Borrowing.student_id = Student.student_id)inner join Book on Borrowing.book_id = Book.book_id )where First_name =  "+"'"+student+"'" );
+            rs = st.executeQuery("select Student.First_name,Student.Last_name,Borrowing.Start_date,Borrowing.End_date,Book.title from(( Borrowing inner join Student on Borrowing.student_id = Student.student_id)inner join Book on Borrowing.book_id = Book.book_id )where Student.STUDENT_ID =  "+"'"+student_id+"'" );
         } catch (SQLException ex) {
             Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -308,7 +342,7 @@ if (student.contains("Choose")==false){
         int x=1,y=0;
         
             while (rs.next()) {
-            System.out.println("hgjhg");
+           
 
                 String Fname = rs.getString(1).toString();
                 String Lname = rs.getString(2).toString();
@@ -316,7 +350,6 @@ if (student.contains("Choose")==false){
                 Date Edate=rs.getDate(4);
                 String Title = rs.getString(5).toString();
 
-                System.out.println(Fname + Lname + Sdate + Edate + Title);
                      Row r= sh.createRow(x);
               
               r.createCell(y).setCellValue(Fname);
@@ -580,7 +613,7 @@ Statement st = null;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new PrintReport().setVisible(true);
+                news.setVisible(true);
             
                  
 

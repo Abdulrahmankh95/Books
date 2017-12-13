@@ -25,7 +25,7 @@ public class Attendance {
       
       
          AlienClass1Reader reader = new AlienClass1Reader(); 
-         reader.setConnection("192.168.1.3", 23); 
+         reader.setConnection("192.168.1.2", 23); 
          reader.setUsername("alien"); 
          reader.setPassword("password"); 
 
@@ -66,7 +66,7 @@ public class Attendance {
             String  t1 = rs.getString(2);
             String  cid = rs.getString(3);
 
-                System.out.println(t);
+                System.out.println(t); 
                 System.out.println(t1);
                 System.out.println(cid);
  

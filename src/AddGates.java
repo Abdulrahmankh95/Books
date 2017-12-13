@@ -243,9 +243,14 @@ public class AddGates extends javax.swing.JFrame {
 
     
  
-  
-    
-        try {
+         if(jTextField1.getText().toString().equals("")||jTextField2.getText().toString().equals("")||jTextField3.getText().toString().equals("")){
+            
+             JOptionPane.showMessageDialog(null, "Enter Data ");
+
+        
+         }else{
+        
+             try {
             rs = st.executeQuery("insert into gates values('"+jTextField1.getText().toString()+"','"+jTextField3.getText().toString()+"','"+jTextField2.getText().toString()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(AddGates.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,8 +262,10 @@ public class AddGates extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AddGates.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
-   JOptionPane.showMessageDialog(null, "Gate Added ");
+          
+          JOptionPane.showMessageDialog(null, "Gate Added ");
+
+         }
  
    
 
