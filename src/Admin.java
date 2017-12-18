@@ -8,22 +8,15 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+ 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author ahmed aljohani
- */
+
 public class Admin {
     
-      int Admin_id;
-      String Username;
+    int Admin_id;
+    String Username;
     String First_name;
-     String Last_name;
+    String Last_name;
     String Admin_email;
     String Password;
 
@@ -77,9 +70,12 @@ public class Admin {
     
     
     public static boolean Log_in(String username,String passw) throws SQLException{
-       String uname="" ;
+        
+        String uname="" ;
         String pass ="";
         boolean ch = false;
+        
+        // database coonection 
         Statement st = null;
         Connection conn = null;
 
@@ -87,7 +83,7 @@ public class Admin {
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -98,19 +94,19 @@ public class Admin {
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
   
 
 
-    
+      // retrieve username and password of the admin users
         rs = st.executeQuery("select username,password from userss where user_type = 'Admin'");
         try {
             while (rs.next()) {
@@ -119,20 +115,14 @@ public class Admin {
                 
 
                if (username.equals(uname) && passw.equals(pass)){
-        ch=true;
+                ch=true;
         
-        }
-                
-
-                 
-                         
             }
-      
             
-            
-            
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
  
         
@@ -142,12 +132,8 @@ public class Admin {
         }
         
        return ch;
-}
-       
-        
-        
-    
-    
+    }
+ 
      public static void Create_accounts(){
     }
     

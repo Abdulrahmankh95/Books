@@ -10,19 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author ahmed aljohani
- */
+
 public class students {
     
     
-   
+    
    public static String First_name;
    public static  String Last_name;
 
@@ -48,7 +40,8 @@ public class students {
    
     
      public static boolean Log_in(String username,String passw) throws SQLException{
-       String uname="" ;
+      
+        String uname="" ;
         String pass ="";
         boolean ch=false;
         
@@ -84,30 +77,28 @@ public class students {
 
     
         rs = st.executeQuery("select username,password, FIRST_NAME,LAST_NAME from Users where user_type = 'Student'");
+        
         try {
             while (rs.next()) {
-               uname = rs.getString(1).toString();
+                uname = rs.getString(1).toString();
                 pass = rs.getString(2).toString();
                 String fname=rs.getString(3).toString();
                 String lname =rs.getString(4).toString();
-           if (username.equals(uname) && passw.equals(pass)){
-               First_name=fname;
-               Last_name=lname;
-        ch=true;
+         
+                if (username.equals(uname) && passw.equals(pass)){
+              
+                    First_name=fname;
+                    Last_name=lname;
+       
+                    ch=true;
         }
-                
-
-                           
+                      
             }
-            
-            
-            
-            
+ 
         } catch (SQLException ex) {
             Logger.getLogger(students.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
         
         
        
@@ -120,11 +111,5 @@ public class students {
 }
      
     
-   
-        
-   
-
-    
-   
-      
+     
 }

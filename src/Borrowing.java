@@ -13,22 +13,23 @@ import javax.swing.JOptionPane;
 
 public class Borrowing {
     
-     int Book_id;
-     int Student_id;
+    int Book_id;
+    int Student_id;
     String Book_title;
     int Start_date;
     int End_date;
-     String Status;
+    String Status;
      
      public static boolean borrowing2 (String a,boolean ch) throws SQLException{
-       Statement st = null;
+       
+        Statement st = null;
         Connection conn = null;
         
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -39,36 +40,39 @@ public class Borrowing {
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
          
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         ResultSet rs = null;
-         String book_id=" ";
+       
+        String book_id=" ";
          
         while(!book_id.equals(a)){
-        rs = st.executeQuery("select book_id from book ");
+       
+         rs = st.executeQuery("select book_id from book ");
       
         while(rs.next()){
             
          book_id = rs.getNString(1).toString();
+        
          if(a.equals(book_id))
          break;
         }
          
         if(book_id.equals(a)){
         
-                        JOptionPane.showMessageDialog(null," Match is found " );
+        JOptionPane.showMessageDialog(null," Match is found " );
         ch=true;
         
         }else{
         
-                        JOptionPane.showMessageDialog(null," Match not found" );
+        JOptionPane.showMessageDialog(null," Match not found" );
              break;
         }
         
@@ -78,14 +82,14 @@ public class Borrowing {
      
      public static boolean Borrwowing(String b,boolean ch) throws SQLException{
   
-         Statement st = null;
+        Statement st = null;
         Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -96,13 +100,13 @@ public class Borrowing {
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
          
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rss = null;
         
@@ -114,7 +118,8 @@ public class Borrowing {
      
         while(rss.next()){
          student_id = rss.getNString(1).toString();
-        if(student_id.equals(b)) 
+       
+         if(student_id.equals(b)) 
             break;
         }
          
@@ -132,6 +137,14 @@ public class Borrowing {
            return ch;
      }
 
+     
+     
+     
+     
+     
+     
+     
+     
     public int getBook_tag() {
         return Book_id;
     }

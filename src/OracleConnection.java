@@ -12,7 +12,7 @@ public class OracleConnection {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
         
-   Connection conn =null;
+        Connection conn =null;
         
     
         String DriverName="oracle.jdbc.driver.OracleDriver";
@@ -26,7 +26,7 @@ public class OracleConnection {
         conn=DriverManager.getConnection(url,Username,password);
           System.out.println("Successfully connected to the database");
      
-      /////////////////////////////////////
+   
       try{
       Statement st=conn.createStatement();
       ResultSet rs=st.executeQuery("select * from TestingTable");

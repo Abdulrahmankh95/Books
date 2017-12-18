@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
 import com.alien.enterpriseRFID.reader.*; 
  import com.alien.enterpriseRFID.tags.*; 
  import com.alien.enterpriseRFID.notify.*;
@@ -54,8 +52,10 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
     public void run() {
 
         try {      
+            
             int j=Integer.parseInt(Thread.currentThread().getName().substring(7));
             gettag(sd[j],ed[j],cid[j]);
+            
         } catch (AlienReaderTimeoutException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (AlienReaderConnectionException ex) {
@@ -81,7 +81,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -92,7 +92,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
             
 
@@ -108,7 +108,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
             st4 = conn.createStatement();
 
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
         ResultSet rs2 = null;
@@ -121,6 +121,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
           SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
           time = localDateFormat.format(sysdate);
           System.out.println(time);
+          
           try{
           if (start.equals(time)){  
             
@@ -136,6 +137,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
           System.out.println(Tagtime);
           String t5=" ";
           String studentname=null;
+          
           rs = st.executeQuery("select Course_Name from course where Course_Id='"+course_id+"' ");
          
           while(rs.next()){
@@ -145,6 +147,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
 
             
           rs2 = st2.executeQuery("select Courses,Student_Id,First_Name,Last_Name from student ");
+         
           while (rs2.next()) {
              String t = rs2.getString(1);
              String Stid=rs2.getString(2).toString();
@@ -157,6 +160,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
                                       
                           if(count!=0){
                   rs3 = st3.executeQuery("select STUDENT_NAME from attendance");      
+                 
                   boolean x=false;  
                   
                   while (rs3.next()) {

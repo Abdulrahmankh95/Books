@@ -23,7 +23,7 @@ public class Attendance {
   public static void Time () throws SQLException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException{
   
       
-      
+       // Alien RFID connection 
          AlienClass1Reader reader = new AlienClass1Reader(); 
          reader.setConnection("192.168.1.2", 23); 
          reader.setUsername("alien"); 
@@ -31,12 +31,13 @@ public class Attendance {
 
          reader.open();
          
+        // database connection  
         Connection conn = null;
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -47,7 +48,7 @@ public class Attendance {
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
           
 
@@ -55,14 +56,14 @@ public class Attendance {
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
       
         rs = st.executeQuery("select Start_Time,End_Time,COURSE_ID from schedule");
         try {
             while (rs.next()) {
-           String   t = rs.getString(1);
+            String   t = rs.getString(1);
             String  t1 = rs.getString(2);
             String  cid = rs.getString(3);
 
@@ -74,7 +75,7 @@ public class Attendance {
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
   
   
@@ -83,16 +84,10 @@ public class Attendance {
 
     
     public static void main(String[] args) throws SQLException, AlienReaderConnectionException, AlienReaderException {
-        
-        
-        
+
             Time();
 
-        
-        
-        
-        
-        
+  
     }
 
 }

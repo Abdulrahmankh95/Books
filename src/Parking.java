@@ -29,31 +29,17 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Parking extends Thread   {
-
-    String tag;
-    public static String f;
-    public static int k=0;
-    public static String time;
-    public static String[] sd= new String[10];
-    public static String[] ed = new String[10];
-    public static String[] cid= new String[10];
-    
-    
-    public static Date Tagtime;
-    
+   
 public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, AlienReaderNotValidException, SQLException{
 
- 
-  
-  
 } 
  
-
-    public void run() {
+        public void run() {
 
         try {      
           
             gettag();
+            
         } catch (AlienReaderTimeoutException ex) {
             Logger.getLogger(ReaderConnection2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (AlienReaderConnectionException ex) {
@@ -72,17 +58,15 @@ public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionExcept
 
     public static void gettag() throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException, SQLException, InterruptedException {
 
-  String tagList;
+        String tagList;
 
-
-
-  Connection conn = null;
+        Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Parking.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -93,14 +77,14 @@ public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionExcept
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Parking.class.getName()).log(Level.SEVERE, null, ex);
         }
             
 
-Statement st = null;
-Statement st2 = null;
-Statement st3 = null;
-Statement st4 = null;
+            Statement st = null;
+            Statement st2 = null;
+            Statement st3 = null;
+            Statement st4 = null;
 
 
         try {
@@ -112,56 +96,54 @@ Statement st4 = null;
            
 
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Parking.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         ResultSet rs = null;
-ResultSet rs2 = null;
-ResultSet rs3 = null;
-ResultSet rs4 = null;
+        ResultSet rs2 = null;
+        ResultSet rs3 = null;
+        ResultSet rs4 = null;
 
 
-  AlienClass1Reader reader = new AlienClass1Reader(); 
-reader.setConnection("192.168.1.3", 23); 
-reader.setUsername("alien"); 
-reader.setPassword("password"); 
+         AlienClass1Reader reader = new AlienClass1Reader(); 
+         reader.setConnection("192.168.1.3", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
 
-String GAN = "";
-String  GAN2 = " ";
-String CON=null;
-        reader.open();
+         String GAN = "";
+         String  GAN2 = " ";
+         String CON=null;
+         reader.open();
  
-String RID=Integer.toString(reader.getReaderNumber());
+         String RID=Integer.toString(reader.getReaderNumber());
 
-        System.out.println(RID);
-while(true){
-    
-    
+          
+        while(true){
 
-      try {
-            
+         try {
+ 
+        tagList = reader.getTagID();
+        if(tagList!=null){ 
+           rs = st.executeQuery("select GATE_NUM from student where STUDENT_ID='"+tagList+"' ");
            
-            
- 
-    tagList = reader.getTagID();
-     if(tagList!=null){ 
-      rs = st.executeQuery("select GATE_NUM from student where STUDENT_ID='"+tagList+"' ");
-        while (rs.next()) {
+             while (rs.next()) {
               GAN = rs.getString(1);
         }
-          rs2 = st2.executeQuery("select GATE_NUM,COLLEGE_NAME from gates where READER_ID='"+RID+"' ");
+            rs2 = st2.executeQuery("select GATE_NUM,COLLEGE_NAME from gates where READER_ID='"+RID+"' ");
 
                    while (rs2.next()) {
                  GAN2 = rs2.getString(1);
                  CON = rs2.getString(2);
                    }
                     
+                   
                    String sd = null;
                    rs4 = st4.executeQuery("select STUDENT_ID from PARKING ");
 
                    while (rs4.next()) {
                    sd = rs4.getString(1);
                    }
-           
+           // check if the srtudent is already exist in the parking area 
                    if(!sd.equals(tagList)){
                    
                    if(GAN.contains(GAN2)){
@@ -192,7 +174,7 @@ while(true){
     public static void main(String[] args) throws AlienReaderConnectionException, AlienReaderException, AlienReaderTimeoutException, AlienReaderNotValidException, SQLException {
 
 
-new Parking().start();
+     new Parking().start();
 
 
 

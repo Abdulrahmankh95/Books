@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+ 
 
 public class ManageAccessRight extends javax.swing.JFrame {
    
@@ -15,6 +15,8 @@ public class ManageAccessRight extends javax.swing.JFrame {
 
     public ManageAccessRight() {
         initComponents();
+   
+       // add student name and gates to the combobox
         sname();
         gname();
     }
@@ -22,14 +24,14 @@ public class ManageAccessRight extends javax.swing.JFrame {
     
       public  void sname(){
    
- 
-Connection conn = null;
+      // database connection 
+        Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -40,23 +42,23 @@ Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
-Statement st = null;
+        Statement st = null;
         try {
             st = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
   
-    
+        // retrieve the student name to add it to the combobox 
       try {
             rs = st.executeQuery("select FIRST_NAME,LAST_NAME from student" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (rs.next()) {
@@ -69,42 +71,23 @@ Statement st = null;
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
   
-        
-         
-       
-       
-       
-       
-       
-       
-       
-       
-    
-       
-       
-       
-       
-       
-       
-       
-       
     }
     
       
       
       public  void gname(){
    
- 
-Connection conn = null;
+      // database connection 
+        Connection conn = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -115,23 +98,23 @@ Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
-Statement st1 = null;
+        Statement st1 = null;
         try {
             st1 = conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs1 = null;
   
-    
+    // retrieve the college name to add it to the combobox 
       try {
             rs1 = st1.executeQuery("select COLLEGE_NAME from gates" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (rs1.next()) {
@@ -144,38 +127,12 @@ Statement st1 = null;
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
   
-        
-         
-       
-       
-       
-       
-       
-       
-       
-       
-    
-       
-       
-       
-       
-       
-       
-       
-       
+  
     }
-    
-    
-    
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -303,21 +260,21 @@ Statement st1 = null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
-Connection conn = null;
-  String OGN = null;
-  String NGN = null;
+     // database connection 
+        Connection conn = null;
+        String OGN = null;
+        String NGN = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -328,13 +285,13 @@ Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
-Statement st = null;
-Statement st1 = null;
-Statement st2 = null;
+            Statement st = null;
+            Statement st1 = null;
+            Statement st2 = null;
 
 
         try {
@@ -344,7 +301,7 @@ Statement st2 = null;
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
         ResultSet rs1 = null;
@@ -355,6 +312,7 @@ Statement st2 = null;
    
         
         String s = jComboBox1.getSelectedItem().toString();
+        
         int i=s.indexOf(" ");
        
         
@@ -363,47 +321,38 @@ Statement st2 = null;
         try {
             rs1 = st1.executeQuery("select GATE_NUM from gates where COLLEGE_NAME='"+jComboBox2.getSelectedItem()+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         } 
         try {
             while (rs1.next()) {
                  NGN = " "+rs1.getString(1).toString();
-                
-       
-      
-                
-                
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-         
-        
+  
          try {
-            rs2 = st2.executeQuery("select GATE_NUM from student where FIRST_NAME='"+s.substring(0, i)+"'" );
+            rs2 = st2.executeQuery("select GATE_NUM from student where FIRST_NAME='"+s.substring(0, i)+"' and Last_Name='"+s.substring(i+1)+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (rs2.next()) {
                  OGN =rs2.getString(1).toString();
-                 
-       
-      
-                
-                  
+        
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+        
         if(!OGN.contains(NGN)){
        String GN = OGN+NGN;
       try {
-            rs = st.executeQuery("update student set GATE_NUM='"+GN+"' where FIRST_NAME='"+s.substring(0, i)+"'" );
+            rs = st.executeQuery("update student set GATE_NUM='"+GN+"' where FIRST_NAME='"+s.substring(0, i)+"'and Last_Name='"+s.substring(i+1)+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
           JOptionPane.showMessageDialog(null, "Access Added ");
@@ -416,23 +365,23 @@ Statement st2 = null;
         }
        }else{
                   JOptionPane.showMessageDialog(null, "Choose somthing");
-
-       
+  
        }
-           
-        
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Connection conn = null;
-  String OGN = null;
-  String NGN = null;
+        
+        
+        Connection conn = null;
+        String OGN = null;
+        String NGN = null;
 
         String DriverName = "oracle.jdbc.driver.OracleDriver";
         try {
             Class.forName(DriverName);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         String ServerName = "DESKTOP-L9V4O19";
         String ServerPort = "1521";
@@ -443,13 +392,13 @@ Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, Username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
-Statement st = null;
-Statement st1 = null;
-Statement st2 = null;
+            Statement st = null;
+            Statement st1 = null;
+            Statement st2 = null;
 
 
         try {
@@ -459,7 +408,7 @@ Statement st2 = null;
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
         ResultSet rs1 = null;
@@ -478,28 +427,24 @@ Statement st2 = null;
         try {
             rs1 = st1.executeQuery("select GATE_NUM from gates where COLLEGE_NAME='"+jComboBox2.getSelectedItem()+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (rs1.next()) {
                  NGN = " "+rs1.getString(1).toString();
-                
-       
-      
-                
-                
+  
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         
         
          try {
-            rs2 = st2.executeQuery("select GATE_NUM from student where FIRST_NAME='"+s.substring(0, i)+"'" );
+            rs2 = st2.executeQuery("select GATE_NUM from student where FIRST_NAME='"+s.substring(0, i)+"'and Last_Name='"+s.substring(i+1)+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (rs2.next()) {
@@ -508,59 +453,29 @@ Statement st2 = null;
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-     if(OGN.contains(NGN)){
-        
-          
-          
-    
+          if(OGN.contains(NGN)){
+      
          try {
-            rs = st.executeQuery("update student set GATE_NUM='"+OGN.replaceAll(NGN, "")+"' where FIRST_NAME='"+s.substring(0, i)+"'" );
+            rs = st.executeQuery("update student set GATE_NUM='"+OGN.replaceAll(NGN, "")+"' where FIRST_NAME='"+s.substring(0, i)+"'and Last_Name='"+s.substring(i+1)+"'" );
         } catch (SQLException ex) {
-            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageAccessRight.class.getName()).log(Level.SEVERE, null, ex);
         }
      
         JOptionPane.showMessageDialog(null, "Access Romoved ");
 
      }
-    
-    
+  
         }else
              JOptionPane.showMessageDialog(null, "Choose Somthing ");
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageAccessRight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageAccessRight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageAccessRight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageAccessRight.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManageAccessRight().setVisible(true);

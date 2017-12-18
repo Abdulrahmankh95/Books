@@ -8,16 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author ahmed aljohani
- */
+
 public class instructor {
     
     int instructor_id;
@@ -26,9 +18,10 @@ public class instructor {
     String emil;
     String tag;
     
-    
+     
     public static boolean Log_in(String username,String passw) throws SQLException{
-       String uname="" ;
+       
+        String uname="" ;
         String pass ="";
         boolean ch=false;
         
@@ -73,24 +66,17 @@ public class instructor {
                 
           if (username.equals(uname) && passw.equals(pass)){
         
-        ch=true;
+             ch=true;
         }
                 
-
-                           
+                    
             }
-            
-            
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(instructor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
-        
-        
-       
         if(ch==false){
         
          JOptionPane.showMessageDialog(null," Wrong Password or Username " );
@@ -98,9 +84,5 @@ public class instructor {
         }
         return ch;
 }
-    
-    
-    
-    
-    
+  
 }

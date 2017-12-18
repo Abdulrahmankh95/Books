@@ -8,21 +8,13 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author ahmed aljohani
- */
+
 public class Book {
      
+     
     
-    
-       int Book_tag;
- String title;
+     int Book_tag;
+     String title;
      String Author;
      String Location;
      String Publisher;
@@ -33,57 +25,7 @@ public class Book {
     }
 
     public static void setBook_tag(String Taglist) {
-       
-        
-        
-//         Statement st = null;
-//        Connection conn = null;
-//
-//        String DriverName = "oracle.jdbc.driver.OracleDriver";
-//        try {
-//            Class.forName(DriverName);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String ServerName = "DESKTOP-L9V4O19";
-//        String ServerPort = "1521";
-//        String sid = "SSBR";
-//        String url = "jdbc:oracle:thin:@" + ServerName + ":" + ServerPort + ":" + sid;
-//        String Username = "sys as sysdba";
-//        String password = "tiger";
-//        try {
-//            conn = DriverManager.getConnection(url, Username, password);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//         
-//        try {
-//            st = conn.createStatement();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PrintReport.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        ResultSet rs = null;
-//  
-//
-//
-//    
-//        rs = st.executeQuery("insert into users values("'');
-     
-        
-        
-        
-        
-        
-          
-      
- 
-         
-         
-        
-        
-          
-      
-        
+   
         
     }
 
