@@ -1,6 +1,7 @@
 
 import com.alien.enterpriseRFID.reader.AlienClass1Reader;
 import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
+import com.alien.enterpriseRFID.reader.AlienReaderConnectionRefusedException;
 import com.alien.enterpriseRFID.reader.AlienReaderException;
 import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
 import java.sql.Connection;
@@ -24,13 +25,14 @@ public class Attendance {
   
       
        // Alien RFID connection 
+       
          AlienClass1Reader reader = new AlienClass1Reader(); 
-         reader.setConnection("192.168.1.2", 23); 
+       
+         reader.setConnection("192.168.1.3", 23); 
          reader.setUsername("alien"); 
          reader.setPassword("password"); 
-
          reader.open();
-         
+      
         // database connection  
         Connection conn = null;
         String DriverName = "oracle.jdbc.driver.OracleDriver";
@@ -67,9 +69,7 @@ public class Attendance {
             String  t1 = rs.getString(2);
             String  cid = rs.getString(3);
 
-                System.out.println(t); 
-                System.out.println(t1);
-                System.out.println(cid);
+             
  
                 new ReaderConnection2(t,t1,cid,reader).start();
                 

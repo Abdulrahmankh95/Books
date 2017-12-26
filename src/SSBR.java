@@ -1,8 +1,18 @@
 
+
+import com.alien.enterpriseRFID.reader.AlienClass1Reader;
+import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
+import com.alien.enterpriseRFID.reader.AlienReaderException;
+import com.alien.enterpriseRFID.reader.AlienReaderNotValidException;
+import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 public class SSBR extends javax.swing.JFrame {
 
     public static SSBR S = new SSBR();
-    
+    public static String ip;
     public SSBR() {
         initComponents();
     }
@@ -108,7 +118,7 @@ public class SSBR extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       Psystem.Owin.setVisible(true);
+       ParkingAccessLogIn.Owin.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
  
     public static void main(String args[]) {
@@ -116,6 +126,66 @@ public class SSBR extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 S.setVisible(true);
+                
+                          AlienClass1Reader reader = new AlienClass1Reader(); 
+                 
+         reader.setConnection("192.168.1.1", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+         try{
+         reader.open();
+         ip="192.168.1.1";
+         } catch(AlienReaderException ex){
+         
+         reader.close();
+         reader.setConnection("192.168.1.2", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+         try{
+         reader.open();
+         ip="192.168.1.2";
+         } catch(AlienReaderException ex1){
+         
+         reader.close();
+         reader.setConnection("192.168.1.3", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+         try{
+         reader.open();
+         ip="192.168.1.3";
+         } catch(AlienReaderException ex2){
+        
+         reader.close();
+         reader.setConnection("192.168.1.4", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+         try{
+         reader.open();
+         ip="192.168.1.4";
+         } catch(AlienReaderException ex3){
+         reader.close();
+         reader.setConnection("192.168.1.5", 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+            
+            try { 
+                reader.open();
+                ip="192.168.1.5";
+            } catch (AlienReaderNotValidException ex4) {
+                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex4);
+            } catch (AlienReaderTimeoutException ex4) {
+                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex4);
+            } catch (AlienReaderConnectionException ex4) {
+                Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex4);
+            }
+       
+         
+         }
+         }
+         }
+         }
+                
+                
             }
         });
     }

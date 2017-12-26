@@ -120,7 +120,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
           Date sysdate = new Date();
           SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
           time = localDateFormat.format(sysdate);
-          System.out.println(time);
+          
           
           try{
           if (start.equals(time)){  
@@ -132,9 +132,9 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
           Tagtime= reader.getTime(); 
          
           time = localDateFormat.format(Tagtime);
-          System.out.println(time+Thread.currentThread().getName());
+         
         
-          System.out.println(Tagtime);
+          
           String t5=" ";
           String studentname=null;
           
@@ -201,7 +201,7 @@ public ReaderConnection2(String mn,String kn, String kj,AlienClass1Reader reader
        }
         }catch(NullPointerException e){
                 
-            System.out.println(Thread.currentThread().getName());
+            
             
                 }  
             Thread.sleep(60000);

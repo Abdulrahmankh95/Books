@@ -106,7 +106,7 @@ public Parking() throws AlienReaderTimeoutException, AlienReaderConnectionExcept
 
 
          AlienClass1Reader reader = new AlienClass1Reader(); 
-         reader.setConnection("192.168.1.3", 23); 
+         reader.setConnection(SSBR.ip, 23); 
          reader.setUsername("alien"); 
          reader.setPassword("password"); 
 

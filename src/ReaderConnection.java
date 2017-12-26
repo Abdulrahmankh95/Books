@@ -4,6 +4,7 @@
 import com.alien.enterpriseRFID.reader.AlienClass1Reader;
 import com.alien.enterpriseRFID.reader.AlienReaderCommandErrorException;
 import com.alien.enterpriseRFID.reader.AlienReaderConnectionException;
+import com.alien.enterpriseRFID.reader.AlienReaderConnectionRefusedException;
 import com.alien.enterpriseRFID.reader.AlienReaderException;
 import com.alien.enterpriseRFID.reader.AlienReaderNotValidException;
 import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
@@ -18,12 +19,14 @@ public class ReaderConnection {
 public static String gettag() throws AlienReaderNotValidException, AlienReaderTimeoutException, AlienReaderConnectionException, AlienReaderException{
 
 AlienClass1Reader reader = new AlienClass1Reader(); 
-reader.setConnection("192.168.1.2", 23); 
-reader.setUsername("alien"); 
-reader.setPassword("password"); 
-
+    
+         reader.setConnection(Borrow.ip, 23); 
+         reader.setUsername("alien"); 
+         reader.setPassword("password"); 
+         reader.open();
        
-reader.open();
+
+ 
          
 
  String tagListo="";
